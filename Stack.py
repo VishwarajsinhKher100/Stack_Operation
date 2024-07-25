@@ -1,36 +1,31 @@
 class Stack:
-    def __init__(self):
+    def __init__(self, max_size):
         self.items = []
+        self.max_size = max_size
 
     def push(self, item):
+        if self.is_full():
+            raise OverflowError("Stack is Full")
         self.items.append(item)
 
     def pop(self):
         if not self.is_empty():
             return self.items.pop()
         else:
-            return "Stack is empty"
+            raise IndexError("Stack is Empty")
 
-    def peek(self):
-        if not self.is_empty():
-            return self.items[-1]
-        else:
-            return "Stack is empty"
-
-    def display(self):
-        print("Stack elements are:", self.items)
-
-    def size(self):
-        return len(self.items)
+    def is_full(self):
+        return len(self.items) == self.max_size
 
     def is_empty(self):
         return len(self.items) == 0
-
-    def clear(self):
-        self.items = []
+    
+    def display(self):
+        print("Stack elements are:", self.items)
 
 # Example usage
-stack = Stack()
+max_size = 5
+stack = Stack(max_size)
 stack.push(10)
 stack.push(20)
 stack.push(30)
